@@ -1,6 +1,4 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
-import { resolveObjectURL } from 'buffer';
-import { log } from 'console';
 import { BooksService } from './books.service';
 
 @Controller('books')
@@ -11,13 +9,17 @@ export class BooksController {
     this.booksService = booksService;
   }
 
-  @Get('/:id')
+  @Get()
   getAllBooks() {
     return this.booksService.getAllBooks();
   }
 
   @Post()
-  createBook(@Body() payload: any) {
-    console.log(payload);
+  createBook(
+    @Body('title') title: string,
+    @Body('author') author: string,
+    @Body('category') category: string,
+  ) {
+    return this.booksService.createBook(title, author, category);
   }
 }

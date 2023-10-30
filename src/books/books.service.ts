@@ -7,4 +7,8 @@ export class BooksService {
   getAllBooks(): any[] {
     return this.books;
   }
+  createBook(title: string, author: string, category: string) {
+    this.books.push({ title, author, category });
+    return this.books;
+  }
 }
